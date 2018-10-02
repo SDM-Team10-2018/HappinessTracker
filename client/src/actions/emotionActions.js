@@ -10,7 +10,7 @@ export const addEmotions = emotion => dispatch => {
 
 
     axios.post('/api/emotions', {
-        emotion: 'test'
+        emotion: emotion
       })
       .then(function (response) {
         console.log(response);

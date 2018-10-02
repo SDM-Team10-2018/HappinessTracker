@@ -16,11 +16,14 @@ import PropTypes from 'prop-types';
 
 class RequestText extends Component {
     componentDidMount(){
-        this.props.addEmotions();
+        //this.props.addEmotions();
+        this.setState({
+            individualHappiness : 'undefined',
+            teamHappiness: 'undefined',
+            message: ''
+        })
+        this.render();
     }
-
-  
-
     render() {
         const { messages } = this.props;
         return(
@@ -164,8 +167,10 @@ class RequestText extends Component {
                         </Col>
                     </Row>
                     <Row>
-                    <Col align='center'>
-                       <h3> {this.props.messages} </h3>
+                    <Col align='right' xs={12} sm={10}>
+                        <ListGroup>
+                            <ListGroupItem color='dark' onClick={this.postponed}>Click here to postpone...</ListGroupItem>
+                        </ListGroup>
                     </Col>
                     </Row>
                 </Grid>
@@ -175,6 +180,32 @@ class RequestText extends Component {
             </div>
         );
         
+    }
+
+    postponed = () => {
+        confirmAlert({
+            message: 'Please select postpone time:',
+            buttons: [
+                {
+                    label: '5 Minutes',
+                    onClick: () => {
+                        this.setState({postponedFor: '5'});
+                    }
+                },
+                {
+                    label: '10 Minutes',
+                    onClick: () => {
+                        this.setState({postponedFor: '10'});
+                    }
+                },
+                {
+                    label: '20 Minutes',
+                    onClick: () => {
+                        this.setState({postponedFor: '20'});
+                    }
+                }
+            ]
+        })
     }
 
     submit = () => {
@@ -195,8 +226,10 @@ class RequestText extends Component {
                         ]
 
                         
-                        this.props.addEmotions(add);
+                        this.props.addEmotions(newEmotion);
+                        
                         }
+                        
                 },
                 {
                     label: 'Cancel',
