@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const EmotionSchema = new Schema({
     emotion : {
         type : String,
-        required : true
+        //required : true
     },
     date : {
         type: Date,
