@@ -8,6 +8,7 @@ import Sad from '../images/Sad.jpg';
 import Meh from '../images/Neutral.jpg';
 import Happy from '../images/Happy.jpg';
 import VeryHappy from '../images/VeryHappy.jpg';
+import Empty from '../images/Empty.jpg';
 import { connect } from 'react-redux';
 import { addEmotions } from '../actions/emotionActions';
 import PropTypes from 'prop-types';
@@ -27,7 +28,7 @@ class RequestText extends Component {
                 <Container>
                 <Grid>  
                     <Row>
-                    <h1>Please enter your happines level:</h1>
+                    <h4>Please enter your happines level:</h4>
                     </Row>
                     <Row>
                         <Col align="center" xs={12} sm={2}>
@@ -87,9 +88,10 @@ class RequestText extends Component {
                         <h5>VeryHappy</h5>
                         </Col>
                     </Row>
+                    <Row><Col><Image height="50px" src={Empty}></Image></Col></Row>
 
                     <Row>
-                    <h1>Please enter your team's happines level:</h1>
+                    <h4>Please enter your team's happines level:</h4>
                     </Row>
                     <Row>
                         <Col align="center" xs={12} sm={2}>
@@ -149,10 +151,10 @@ class RequestText extends Component {
                         <h5>VeryHappy</h5>
                         </Col>
                     </Row>
-
+                    <Row><Col><Image height="50px" src={Empty}></Image></Col></Row>
 
                     <Row>
-                        <Col align = "center" xs={12} sm={12}>
+                        <Col align = "center" xs={12} sm={10}>
                             <Button
                                 color='dark'
                                 style={{marginBottom:'2rem'}}
