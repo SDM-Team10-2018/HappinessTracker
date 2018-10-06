@@ -12,9 +12,27 @@ import Empty from '../images/Empty.jpg';
 import { connect } from 'react-redux';
 import { addEmotions } from '../actions/emotionActions';
 import PropTypes from 'prop-types';
+import Notifier from "react-desktop-notification";
 
 
 class RequestText extends Component {
+    gotNewNotification() {
+        //Here will pop a notifier and always open in a new window when clicked.
+        //Notifier.start(
+        //  "Happiness Tracker",
+        //  "Jonathan",
+        //  "www.google.com",
+        //  "validated image url"
+        //);
+        Notifier.start(
+            "Happiness Tracker",
+            "Please log in your input in Happiness Tracker",
+            "https://glacial-citadel-91690.herokuapp.com/"
+          );
+    
+    }
+
+
     componentDidMount(){
         //this.props.addEmotions();
         this.setState({
@@ -23,6 +41,7 @@ class RequestText extends Component {
             message: ''
         })
         this.render();
+        setTimeout(this.gotNewNotification, 10000);
     }
     render() {
         const { messages } = this.props;
