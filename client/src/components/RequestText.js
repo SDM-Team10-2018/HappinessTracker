@@ -220,12 +220,7 @@ class RequestText extends Component {
 
                         const newEmotion = this.state.individualHappiness + " " 
                         + this.state.teamHappiness;
-                        const add = [
-                            { emo: 'happy'},
-                            { emo: 'sad'}
-                        ]
-
-                        
+                      
                         this.props.addEmotions(newEmotion);
                         
                         }
