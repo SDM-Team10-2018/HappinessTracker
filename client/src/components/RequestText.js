@@ -218,10 +218,7 @@ class RequestText extends Component {
                         this.setState({confirmed: 'true'});
                         this.setState({messages: 'Thank You!'});
 
-                        const newEmotion = this.state.individualHappiness + " " 
-                        + this.state.teamHappiness;
-                      
-                        this.props.addEmotions(newEmotion);
+                        this.props.addEmotions(this.state.individualHappiness,this.state.teamHappiness);
                         
                         }
                         
@@ -240,11 +237,13 @@ class RequestText extends Component {
 
 RequestText.propTypes = {
     addEmotions: PropTypes.func.isRequired,
-    emotions: PropTypes.object.isRequired
+    emotions: PropTypes.object.isRequired,
+    emotion2: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    emotions: state.emotions
+    emotions: state.individualHappiness,
+    emotion2: state.teamHappiness
 });
 
 
