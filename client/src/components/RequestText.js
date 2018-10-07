@@ -210,18 +210,42 @@ class RequestText extends Component {
                     label: '5 Minutes',
                     onClick: () => {
                         this.setState({postponedFor: '5'});
+                        confirmAlert({
+                            message: 'Thank you! You will be sent a reminder in 5 minutes.',
+                            buttons: [
+                                {
+                                    label: 'Ok'
+                                }
+                            ]
+                        })
                     }
                 },
                 {
                     label: '10 Minutes',
                     onClick: () => {
                         this.setState({postponedFor: '10'});
+                        confirmAlert({
+                            message: 'Thank you! You will be sent a reminder in 10 minutes.',
+                            buttons: [
+                                {
+                                    label: 'Ok'
+                                }
+                            ]
+                        })
                     }
                 },
                 {
                     label: '20 Minutes',
                     onClick: () => {
                         this.setState({postponedFor: '20'});
+                        confirmAlert({
+                            message: 'Thank you! You will be sent a reminder in 20 minutes.',
+                            buttons: [
+                                {
+                                    label: 'Ok'
+                                }
+                            ]
+                        })
                     }
                 }
             ]
@@ -239,7 +263,14 @@ class RequestText extends Component {
                         this.setState({messages: 'Thank You!'});
 
                         this.props.addEmotions(this.state.individualHappiness,this.state.teamHappiness);
-                        
+                        confirmAlert({
+                            message: 'Thank you! Your responses have been saved.',
+                            buttons: [
+                                {
+                                    label: 'Ok'
+                                }
+                            ]
+                        })
                         }
                         
                 },
