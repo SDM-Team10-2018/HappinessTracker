@@ -27,7 +27,8 @@ class RequestText extends Component {
         Notifier.start(
             "Happiness Tracker",
             "Please log in your input in Happiness Tracker",
-            "https://glacial-citadel-91690.herokuapp.com/"
+            "https://hidden-retreat-92723.herokuapp.com/"
+            //"https://glacial-citadel-91690.herokuapp.com/"
           );
     
     }
