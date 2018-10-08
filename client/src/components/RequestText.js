@@ -27,7 +27,7 @@ class RequestText extends Component {
         Notifier.start(
             "Happiness Tracker",
             "Please log in your input in Happiness Tracker",
-            "https://hidden-retreat-92723.herokuapp.com/"
+            "https://gentle-chamber-61056.herokuapp.com/"
             //"https://glacial-citadel-91690.herokuapp.com/"
           );
     
@@ -42,7 +42,7 @@ class RequestText extends Component {
             message: ''
         })
         this.render();
-        setTimeout(this.gotNewNotification, 10000);
+        //setTimeout(this.gotNewNotification, 10000);
     }
     render() {
         const { messages } = this.props;
@@ -210,6 +210,7 @@ class RequestText extends Component {
                     label: '5 Minutes',
                     onClick: () => {
                         this.setState({postponedFor: '5'});
+                        setTimeout(this.gotNewNotification, 10000);
                         confirmAlert({
                             message: 'Thank you! You will be sent a reminder in 5 minutes.',
                             buttons: [
@@ -224,6 +225,7 @@ class RequestText extends Component {
                     label: '10 Minutes',
                     onClick: () => {
                         this.setState({postponedFor: '10'});
+                        setTimeout(this.gotNewNotification, 600000);
                         confirmAlert({
                             message: 'Thank you! You will be sent a reminder in 10 minutes.',
                             buttons: [
@@ -238,6 +240,7 @@ class RequestText extends Component {
                     label: '20 Minutes',
                     onClick: () => {
                         this.setState({postponedFor: '20'});
+                        setTimeout(this.gotNewNotification, 1200000);
                         confirmAlert({
                             message: 'Thank you! You will be sent a reminder in 20 minutes.',
                             buttons: [
