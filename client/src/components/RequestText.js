@@ -51,7 +51,7 @@ class RequestText extends Component {
                 <Container>
                 <Grid>  
                     <Row>
-                    <h4>Please enter your happines level:</h4>
+                    <h4>Select a picture below that best represents how happy you are feeling with your work:</h4>
                     </Row>
                     <Row>
                         <Col align="center" xs={12} sm={2}>
@@ -64,7 +64,7 @@ class RequestText extends Component {
                                 this.setState({
                                     individualHappiness: 'VerySad'});}}
                             ></Image>
-                        <h5>Very Sad</h5>
+                        <h5>Not at all happy</h5>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -75,7 +75,7 @@ class RequestText extends Component {
                                 this.setState({
                                     individualHappiness: 'Sad'});}}
                             ></Image>
-                        <h5>Sad</h5>
+                        <h5>Not so happy</h5>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -86,7 +86,7 @@ class RequestText extends Component {
                                 this.setState({
                                     individualHappiness: 'Neutral'});}}
                             ></Image>
-                        <h5>Meh</h5>
+                        <h5>Neutral</h5>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -114,7 +114,7 @@ class RequestText extends Component {
                     <Row><Col><Image height="50px" src={Empty}></Image></Col></Row>
 
                     <Row>
-                    <h4>Please enter your team's happines level:</h4>
+                    <h4>Select a picture below that best represents how happy you think your team isfeeling with their work:</h4>
                     </Row>
                     <Row>
                         <Col align="center" xs={12} sm={2}>
@@ -127,7 +127,7 @@ class RequestText extends Component {
                                 this.setState({
                                     teamHappiness: 'VerySad'});}}
                             ></Image>
-                        <h5>Very Sad</h5>
+                        <h5>Not at all happy</h5>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -138,7 +138,7 @@ class RequestText extends Component {
                                 this.setState({
                                     teamHappiness: 'Sad'});}}
                             ></Image>
-                        <h5>Sad</h5>
+                        <h5>Not so happy</h5>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -149,7 +149,7 @@ class RequestText extends Component {
                                 this.setState({
                                     teamHappiness: 'Neutral'});}}
                             ></Image>
-                        <h5>Meh</h5>
+                        <h5>Neutral</h5>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -264,7 +264,7 @@ class RequestText extends Component {
 
                         this.props.addEmotions(this.state.individualHappiness,this.state.teamHappiness);
                         confirmAlert({
-                            message: 'Thank you! Your responses have been saved.',
+                            message: 'Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.',
                             buttons: [
                                 {
                                     label: 'Ok'
