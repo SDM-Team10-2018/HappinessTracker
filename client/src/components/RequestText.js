@@ -114,7 +114,7 @@ class RequestText extends Component {
                     <Row><Col><Image height="50px" src={Empty}></Image></Col></Row>
 
                     <Row>
-                    <h4>Select a picture below that best represents how happy you think your team isfeeling with their work:</h4>
+                    <h4>Select a picture below that best represents how happy you think your team is feeling with their work:</h4>
                     </Row>
                     <Row>
                         <Col align="center" xs={12} sm={2}>
