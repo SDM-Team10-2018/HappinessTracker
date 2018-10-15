@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container , Button, Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
-import { Grid, Image} from 'react-bootstrap';
+import { Container , Row, Col, ListGroup, ListGroupItem, Fade} from 'reactstrap';
+import { Grid, Image, Button} from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import VerySad from '../images/VerySad.jpg';
@@ -8,7 +8,7 @@ import Sad from '../images/Sad.jpg';
 import Meh from '../images/Neutral.jpg';
 import Happy from '../images/Happy.jpg';
 import VeryHappy from '../images/VeryHappy.jpg';
-import Empty from '../images/Empty.jpg';
+import GreenCheck from '../images/GreenCheck.jpg';
 import { connect } from 'react-redux';
 import { addEmotions } from '../actions/emotionActions';
 import PropTypes from 'prop-types';
@@ -16,40 +16,52 @@ import Notifier from "react-desktop-notification";
 
 
 class RequestText extends Component {
+
+    state = {
+        isClicked: false,
+        isIndNotAtAllHappySelected: false,
+        isIndNotSoHappySelected: false,
+        isIndNeutralSelected: false,
+        isIndHappySelected: false,
+        isIndVeryHappySelected: false,
+        isTeamNotAtAllHappySelected: false,
+        isTeamNotSoHappySelected: false,
+        isTeamNeutralSelected: false,
+        isTeamHappySelected: false,
+        isTeamVeryHappySelected: false
+    }
+
+    toggle = () => {
+        this.setState({
+            isClicked : !this.state.isClicked
+        });
+    }
+
     gotNewNotification() {
         //Here will pop a notifier and always open in a new window when clicked.
-        //Notifier.start(
-        //  "Happiness Tracker",
-        //  "Jonathan",
-        //  "www.google.com",
-        //  "validated image url"
-        //);
         Notifier.start(
             "Happiness Tracker",
             "Please log in your input in Happiness Tracker",
             "https://gentle-chamber-61056.herokuapp.com/"
-            //"https://glacial-citadel-91690.herokuapp.com/"
           );
     
     }
 
-
     componentDidMount(){
-        //this.props.addEmotions();
         this.setState({
             individualHappiness : 'undefined',
             teamHappiness: 'undefined',
-            message: ''
         })
         this.render();
         //setTimeout(this.gotNewNotification, 10000);
     }
+
     render() {
-        const { messages } = this.props;
         return(
+            
             <div>
                 <Container>
-                <Grid>  
+                <Grid> 
                     <Row>
                     <h4>Select a picture below that best represents how happy you are feeling with your work:</h4>
                     </Row>
@@ -61,10 +73,20 @@ class RequestText extends Component {
                             src={VerySad}  
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    individualHappiness: 'VerySad'});}}
+                                this.setState({individualHappiness: 'NotAtAllHappy'});
+                                this.setState({isIndNotAtAllHappySelected: true,
+                                    isIndNotSoHappySelected: false,
+                                    isIndNeutralSelected: false,
+                                    isIndHappySelected: false,
+                                    isIndVeryHappySelected: false});
+                            }}
                             ></Image>
                         <h5>Not at all happy</h5>
+                        <Fade in={this.state.isIndNotAtAllHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
+                        
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -72,10 +94,19 @@ class RequestText extends Component {
                             src={Sad} 
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    individualHappiness: 'Sad'});}}
+                                this.setState({individualHappiness: 'NotSoHappy'});
+                                this.setState({isIndNotAtAllHappySelected: false,
+                                    isIndNotSoHappySelected: true,
+                                    isIndNeutralSelected: false,
+                                    isIndHappySelected: false,
+                                    isIndVeryHappySelected: false});
+                            }}
                             ></Image>
                         <h5>Not so happy</h5>
+                        <Fade in={this.state.isIndNotSoHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -83,10 +114,19 @@ class RequestText extends Component {
                             src={Meh}  
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    individualHappiness: 'Neutral'});}}
+                                this.setState({individualHappiness: 'Neutral'});
+                                this.setState({isIndNotAtAllHappySelected: false,
+                                    isIndNotSoHappySelected: false,
+                                    isIndNeutralSelected: true,
+                                    isIndHappySelected: false,
+                                    isIndVeryHappySelected: false});
+                            }}
                             ></Image>
                         <h5>Neutral</h5>
+                        <Fade in={this.state.isIndNeutralSelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -94,10 +134,19 @@ class RequestText extends Component {
                             src={Happy} 
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    individualHappiness: 'Happy'});}}
+                                this.setState({individualHappiness: 'Happy'});
+                                this.setState({isIndNotAtAllHappySelected: false,
+                                    isIndNotSoHappySelected: false,
+                                    isIndNeutralSelected: false,
+                                    isIndHappySelected: true,
+                                    isIndVeryHappySelected: false});
+                            }}
                             ></Image>
                         <h5>Happy</h5>
+                        <Fade in={this.state.isIndHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -105,13 +154,22 @@ class RequestText extends Component {
                             src={VeryHappy}  
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    individualHappiness: 'VeryHappy'});}}
+                                this.setState({individualHappiness: 'VeryHappy'});
+                                this.setState({isIndNotAtAllHappySelected: false,
+                                    isIndNotSoHappySelected: false,
+                                    isIndNeutralSelected: false,
+                                    isIndHappySelected: false,
+                                    isIndVeryHappySelected: true});
+                            }}
                             ></Image>
-                        <h5>VeryHappy</h5>
+                        <h5>Not so happy</h5>
+                        <Fade in={this.state.isIndVeryHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                     </Row>
-                    <Row><Col><Image height="50px" src={Empty}></Image></Col></Row>
+                    
 
                     <Row>
                     <h4>Select a picture below that best represents how happy you think your team is feeling with their work:</h4>
@@ -124,10 +182,19 @@ class RequestText extends Component {
                             src={VerySad}  
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    teamHappiness: 'VerySad'});}}
+                                this.setState({teamHappiness: 'TeamNotAtAllHappy'});
+                                this.setState({isTeamNotAtAllHappySelected: true,
+                                    isTeamNotSoHappySelected: false,
+                                    isTeamNeutralSelected: false,
+                                    isTeamHappySelected: false,
+                                    isTeamVeryHappySelected: false});
+                            }}
                             ></Image>
-                        <h5>Not at all happy</h5>
+                        <h5>Not At All happy</h5>
+                        <Fade in={this.state.isTeamNotAtAllHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -135,10 +202,19 @@ class RequestText extends Component {
                             src={Sad} 
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    teamHappiness: 'Sad'});}}
+                                this.setState({teamHappiness: 'TeamNotSoHappy'});
+                                this.setState({isTeamNotAtAllHappySelected: false,
+                                    isTeamNotSoHappySelected: true,
+                                    isTeamNeutralSelected: false,
+                                    isTeamHappySelected: false,
+                                    isTeamVeryHappySelected: false});
+                            }}
                             ></Image>
                         <h5>Not so happy</h5>
+                        <Fade in={this.state.isTeamNotSoHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -146,10 +222,19 @@ class RequestText extends Component {
                             src={Meh}  
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    teamHappiness: 'Neutral'});}}
+                                this.setState({teamHappiness: 'TeamNeutral'});
+                                this.setState({isTeamNotAtAllHappySelected: false,
+                                    isTeamNotSoHappySelected: false,
+                                    isTeamNeutralSelected: true,
+                                    isTeamHappySelected: false,
+                                    isTeamVeryHappySelected: false});
+                            }}
                             ></Image>
-                        <h5>Neutral</h5>
+                        <h5>Not so happy</h5>
+                        <Fade in={this.state.isTeamNeutralSelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -157,10 +242,19 @@ class RequestText extends Component {
                             src={Happy} 
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    teamHappiness: 'Happy'});}}
+                                this.setState({teamHappiness: 'TeamHappy'});
+                                this.setState({isTeamNotAtAllHappySelected: false,
+                                    isTeamNotSoHappySelected: false,
+                                    isTeamNeutralSelected: false,
+                                    isTeamHappySelected: true,
+                                    isTeamVeryHappySelected: false});
+                            }}
                             ></Image>
-                        <h5>Happy</h5>
+                        <h5>Not so happy</h5>
+                        <Fade in={this.state.isTeamHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -168,23 +262,34 @@ class RequestText extends Component {
                             src={VeryHappy}  
                             circle
                             onClick = { () => {
-                                this.setState({
-                                    teamHappiness: 'VeryHappy'});}}
+                                this.setState({teamHappiness: 'TeamVeryHappy'});
+                                this.setState({isTeamNotAtAllHappySelected: false,
+                                    isTeamNotSoHappySelected: false,
+                                    isTeamNeutralSelected: false,
+                                    isTeamHappySelected: false,
+                                    isTeamVeryHappySelected: true});
+                            }}
                             ></Image>
-                        <h5>VeryHappy</h5>
+                        <h5>Very Happy</h5>
+                        <Fade in={this.state.isTeamVeryHappySelected} tag="h5" className="mt-3">
+                            <Image width="50px" height="50px"
+                            src={GreenCheck}></Image>
+                        </Fade>
                         </Col>
                     </Row>
-                    <Row><Col><Image height="50px" src={Empty}></Image></Col></Row>
-
                     <Row>
                         <Col align = "center" xs={12} sm={10}>
                             <Button
-                                color='dark'
-                                style={{marginBottom:'2rem'}}
+                                bsStyle="primary"
                                 onClick={this.submit}
                                 block
                             >Submit</Button>
                         </Col>
+                    </Row>
+                    <Row>
+                        <Fade in={this.state.isClicked} tag="h5" className="mt-3">
+                        'Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.'
+                        </Fade>
                     </Row>
                     <Row>
                     <Col align='right' xs={12} sm={10}>
@@ -194,9 +299,7 @@ class RequestText extends Component {
                     </Col>
                     </Row>
                 </Grid>
-                </Container>
-           
-                
+                </Container>     
             </div>
         );
         
@@ -256,35 +359,12 @@ class RequestText extends Component {
     }
 
     submit = () => {
-        confirmAlert({
-            message: 'Are you sure you want to submit these responses?',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => {
-                        this.setState({confirmed: 'true'});
-                        this.setState({messages: 'Thank You!'});
-
-                        this.props.addEmotions(this.state.individualHappiness,this.state.teamHappiness);
-                        confirmAlert({
-                            message: 'Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.',
-                            buttons: [
-                                {
-                                    label: 'Ok'
-                                }
-                            ]
-                        })
-                        }
-                        
-                },
-                {
-                    label: 'Cancel',
-                }
-            ]
-        }
-
-        )
+            this.setState({isClicked : !this.state.isClicked});
+            this.setState({isSelected : true} );
+            this.props.addEmotions(this.state.individualHappiness,this.state.teamHappiness);
     }
+
+
 
 }
 
