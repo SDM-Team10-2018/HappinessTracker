@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Container , Row, Col, ListGroup, ListGroupItem, Fade} from 'reactstrap';
+import { Container , Row, Col, Fade} from 'reactstrap';
 import { Grid, Image, Button} from 'react-bootstrap';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
+//import 'react-confirm-alert/src/react-confirm-alert.css';
 import VerySad from '../images/VerySad.jpg';
 import Sad from '../images/Sad.jpg';
 import Meh from '../images/Neutral.jpg';
@@ -13,22 +12,26 @@ import { connect } from 'react-redux';
 import { addEmotions } from '../actions/emotionActions';
 import PropTypes from 'prop-types';
 import Notifier from "react-desktop-notification";
-import { link } from 'fs';
-
 
 class RequestText extends Component {
 
     state = {
         isClicked: false,
         isPostponed: false,
+
+        // Validating for the completion of both selections for emotion
         isIndDataReadyToSubmit: false,
         isTeamDataReadyToSubmit: false,
         isDataReadyToSubmit: false,
+
+        //Individual Emotion Selections
         isIndNotAtAllHappySelected: false,
         isIndNotSoHappySelected: false,
         isIndNeutralSelected: false,
         isIndHappySelected: false,
         isIndVeryHappySelected: false,
+
+        //Team Emotion Selections
         isTeamNotAtAllHappySelected: false,
         isTeamNotSoHappySelected: false,
         isTeamNeutralSelected: false,
@@ -36,12 +39,15 @@ class RequestText extends Component {
         isTeamVeryHappySelected: false
     }
 
-    toggle = () => {
-        this.setState({
-            isClicked : !this.state.isClicked
-        });
-    }
+   // toggle = () => {
+    //    this.setState({
+    //        isClicked : !this.state.isClicked
+    //    });
+    //}
 
+
+    // Setting the ready status for submitting data 
+    // only when the user has selected both options for the emotions
     setSubmitReadyState = () => {
         if (this.state.isIndDataReadyToSubmit && this.state.isTeamDataReadyToSubmit){
         this.setState({
@@ -50,6 +56,7 @@ class RequestText extends Component {
     }
     }
 
+    //Setting the postpone time for the next notification
     setReminder = (timeLimit) => {
         setTimeout(this.gotNewNotification, timeLimit);
         this.setState({
@@ -57,18 +64,16 @@ class RequestText extends Component {
         });
     }
 
-
-
+    // Generating desktop notifications
     gotNewNotification() {
-        //Here will pop a notifier and always open in a new window when clicked.
         Notifier.start(
             "Howz It Going",
             "It's now time to enter your Happiness Information. Please click here.",
             "https://gentle-chamber-61056.herokuapp.com/"
-          );
-    
+          ); 
     }
 
+    // Default values [for sprint] specified when the component mounts
     componentDidMount(){
         this.setState({
             team: 'team10',
@@ -76,15 +81,20 @@ class RequestText extends Component {
             teamHappiness: 'undefined',
         })
         this.render();
-        //setTimeout(this.gotNewNotification, 10000);
+
+        // [For Current Sprint] - Setting up default notifications for admin specified time delays
+        setTimeout(this.gotNewNotification, 1000000);
     }
 
+    // Rendering the Individual Emotion Selection Section, 
+    // The Team Emotion Selection Section and the Actions & Notifications Area
+    // of the component
     render() {
         return(
-            
             <div>
                 <Container>
                 <Grid> 
+
                     <Row>
                     <h4>Select a picture below that best represents how happy you are feeling with your work:</h4>
                     </Row>
@@ -383,21 +393,19 @@ class RequestText extends Component {
         );
         
     }
-
-    
-
+ 
+    // Invoking the actions to save the user information in the db
+    // once the submit button is clicked 
     submit = () => {
             this.setState({isClicked : !this.state.isClicked});
             this.setState({isSelected : true} );
             this.setState({isDataReadyToSubmit : false});
             this.props.addEmotions(this.state.team, this.state.individualHappiness,this.state.teamHappiness);
     }
-
-
-
 }
 
 
+// Specifying the information passed on to the db by the end user 
 RequestText.propTypes = {
     addEmotions: PropTypes.func.isRequired,
     team: PropTypes.object.isRequired,

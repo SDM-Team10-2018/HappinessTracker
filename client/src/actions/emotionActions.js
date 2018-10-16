@@ -1,17 +1,11 @@
 import axios from 'axios';
-//import { ADD_EMOTIONS } from './types';
-//var querystring = require("querystring");
 
-export const addEmotions = (team, emotion, emotion2) => dispatch => {
-    //return {
-    //    type: ADD_EMOTIONS,
-    //    payload: emotion
-    //};
+export const addEmotions = (team, emotion1, emotion2) => dispatch => {
 
-
+  // POST - Saving the Emotion data for Team Name, Individual Emotion and Team Emotion in DB
     axios.post('/api/emotions', {
         teamName: team,
-        individualEmotion: emotion,
+        individualEmotion: emotion1,
         teamEmotion: emotion2
       })
       .then(function (response) {

@@ -21,7 +21,7 @@ mongoose
 
 app.use('/api/emotions', emotions);
 
-
+// Setting up the Build process for Horeku Deployment
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))
 }

@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+// [Future Sprint] - Setting up for Redux
 const initialState = {};
 
 const middleware = [thunk];

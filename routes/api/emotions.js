@@ -4,7 +4,7 @@ const router = express.Router();
 //Emotion Model
 const Emotion = require('../../models/Emotions');
 
-//Post Emotion
+//POST Emotions - Team Name, Individual Emotion and Team Emotion
 router.post('/', (req, res) => {
     const newEmotion = new Emotion({
         teamName: req.body.teamName,

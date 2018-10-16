@@ -8,14 +8,16 @@ import store from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+// [Two Components in current sprint]
+// 1 - Navigation Bar
+// 2 - Emotion Selection Oprions
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
       <div className="App">
-      <AppNavBar></AppNavBar>
+      <AppNavBar />
       <RequestText />
-       
       </div>
       </Provider>
     );
