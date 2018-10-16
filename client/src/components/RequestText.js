@@ -13,12 +13,17 @@ import { connect } from 'react-redux';
 import { addEmotions } from '../actions/emotionActions';
 import PropTypes from 'prop-types';
 import Notifier from "react-desktop-notification";
+import { link } from 'fs';
 
 
 class RequestText extends Component {
 
     state = {
         isClicked: false,
+        isPostponed: false,
+        isIndDataReadyToSubmit: false,
+        isTeamDataReadyToSubmit: false,
+        isDataReadyToSubmit: false,
         isIndNotAtAllHappySelected: false,
         isIndNotSoHappySelected: false,
         isIndNeutralSelected: false,
@@ -37,11 +42,28 @@ class RequestText extends Component {
         });
     }
 
+    setSubmitReadyState = () => {
+        if (this.state.isIndDataReadyToSubmit && this.state.isTeamDataReadyToSubmit){
+        this.setState({
+            isDataReadyToSubmit : true
+        });
+    }
+    }
+
+    setReminder = (timeLimit) => {
+        setTimeout(this.gotNewNotification, timeLimit);
+        this.setState({
+            isPostponed : true
+        });
+    }
+
+
+
     gotNewNotification() {
         //Here will pop a notifier and always open in a new window when clicked.
         Notifier.start(
-            "Happiness Tracker",
-            "Please log in your input in Happiness Tracker",
+            "Howz It Going",
+            "It's now time to enter your Happiness Information. Please click here.",
             "https://gentle-chamber-61056.herokuapp.com/"
           );
     
@@ -49,6 +71,7 @@ class RequestText extends Component {
 
     componentDidMount(){
         this.setState({
+            team: 'team10',
             individualHappiness : 'undefined',
             teamHappiness: 'undefined',
         })
@@ -78,7 +101,10 @@ class RequestText extends Component {
                                     isIndNotSoHappySelected: false,
                                     isIndNeutralSelected: false,
                                     isIndHappySelected: false,
-                                    isIndVeryHappySelected: false});
+                                    isIndVeryHappySelected: false,
+                                    isIndDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
                         <h5>Not at all happy</h5>
@@ -99,7 +125,10 @@ class RequestText extends Component {
                                     isIndNotSoHappySelected: true,
                                     isIndNeutralSelected: false,
                                     isIndHappySelected: false,
-                                    isIndVeryHappySelected: false});
+                                    isIndVeryHappySelected: false,
+                                    isIndDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
                         <h5>Not so happy</h5>
@@ -119,7 +148,10 @@ class RequestText extends Component {
                                     isIndNotSoHappySelected: false,
                                     isIndNeutralSelected: true,
                                     isIndHappySelected: false,
-                                    isIndVeryHappySelected: false});
+                                    isIndVeryHappySelected: false,
+                                    isIndDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
                         <h5>Neutral</h5>
@@ -139,7 +171,10 @@ class RequestText extends Component {
                                     isIndNotSoHappySelected: false,
                                     isIndNeutralSelected: false,
                                     isIndHappySelected: true,
-                                    isIndVeryHappySelected: false});
+                                    isIndVeryHappySelected: false,
+                                    isIndDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
                         <h5>Happy</h5>
@@ -159,10 +194,13 @@ class RequestText extends Component {
                                     isIndNotSoHappySelected: false,
                                     isIndNeutralSelected: false,
                                     isIndHappySelected: false,
-                                    isIndVeryHappySelected: true});
+                                    isIndVeryHappySelected: true,
+                                    isIndDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
-                        <h5>Not so happy</h5>
+                        <h5>Very happy</h5>
                         <Fade in={this.state.isIndVeryHappySelected} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
@@ -182,12 +220,15 @@ class RequestText extends Component {
                             src={VerySad}  
                             circle
                             onClick = { () => {
-                                this.setState({teamHappiness: 'TeamNotAtAllHappy'});
+                                this.setState({teamHappiness: 'NotAtAllHappy'});
                                 this.setState({isTeamNotAtAllHappySelected: true,
                                     isTeamNotSoHappySelected: false,
                                     isTeamNeutralSelected: false,
                                     isTeamHappySelected: false,
-                                    isTeamVeryHappySelected: false});
+                                    isTeamVeryHappySelected: false,
+                                    isTeamDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
                         <h5>Not At All happy</h5>
@@ -202,12 +243,15 @@ class RequestText extends Component {
                             src={Sad} 
                             circle
                             onClick = { () => {
-                                this.setState({teamHappiness: 'TeamNotSoHappy'});
+                                this.setState({teamHappiness: 'NotSoHappy'});
                                 this.setState({isTeamNotAtAllHappySelected: false,
                                     isTeamNotSoHappySelected: true,
                                     isTeamNeutralSelected: false,
                                     isTeamHappySelected: false,
-                                    isTeamVeryHappySelected: false});
+                                    isTeamVeryHappySelected: false,
+                                    isTeamDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
                         <h5>Not so happy</h5>
@@ -222,15 +266,18 @@ class RequestText extends Component {
                             src={Meh}  
                             circle
                             onClick = { () => {
-                                this.setState({teamHappiness: 'TeamNeutral'});
+                                this.setState({teamHappiness: 'Neutral'});
                                 this.setState({isTeamNotAtAllHappySelected: false,
                                     isTeamNotSoHappySelected: false,
                                     isTeamNeutralSelected: true,
                                     isTeamHappySelected: false,
-                                    isTeamVeryHappySelected: false});
+                                    isTeamVeryHappySelected: false,
+                                    isTeamDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
-                        <h5>Not so happy</h5>
+                        <h5>Neutral</h5>
                         <Fade in={this.state.isTeamNeutralSelected} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
@@ -242,15 +289,18 @@ class RequestText extends Component {
                             src={Happy} 
                             circle
                             onClick = { () => {
-                                this.setState({teamHappiness: 'TeamHappy'});
+                                this.setState({teamHappiness: 'Happy'});
                                 this.setState({isTeamNotAtAllHappySelected: false,
                                     isTeamNotSoHappySelected: false,
                                     isTeamNeutralSelected: false,
                                     isTeamHappySelected: true,
-                                    isTeamVeryHappySelected: false});
+                                    isTeamVeryHappySelected: false,
+                                    isTeamDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
-                        <h5>Not so happy</h5>
+                        <h5>Happy</h5>
                         <Fade in={this.state.isTeamHappySelected} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
@@ -262,21 +312,25 @@ class RequestText extends Component {
                             src={VeryHappy}  
                             circle
                             onClick = { () => {
-                                this.setState({teamHappiness: 'TeamVeryHappy'});
+                                this.setState({teamHappiness: 'VeryHappy'});
                                 this.setState({isTeamNotAtAllHappySelected: false,
                                     isTeamNotSoHappySelected: false,
                                     isTeamNeutralSelected: false,
                                     isTeamHappySelected: false,
-                                    isTeamVeryHappySelected: true});
+                                    isTeamVeryHappySelected: true,
+                                    isTeamDataReadyToSubmit: true
+                                });
+                                this.setSubmitReadyState();
                             }}
                             ></Image>
-                        <h5>Very Happy</h5>
+                        <h5>Very happy</h5>
                         <Fade in={this.state.isTeamVeryHappySelected} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
                         </Col>
                     </Row>
+                    <Fade in={this.state.isDataReadyToSubmit && !this.state.isPostponed} tag="h5" className="mt-3">
                     <Row>
                         <Col align = "center" xs={12} sm={10}>
                             <Button
@@ -284,20 +338,45 @@ class RequestText extends Component {
                                 onClick={this.submit}
                                 block
                             >Submit</Button>
+
                         </Col>
                     </Row>
+                    </Fade>
                     <Row>
                         <Fade in={this.state.isClicked} tag="h5" className="mt-3">
                         'Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.'
                         </Fade>
                     </Row>
                     <Row>
-                    <Col align='right' xs={12} sm={10}>
-                        <ListGroup>
-                            <ListGroupItem color='dark' onClick={this.postponed}>Click here to postpone...</ListGroupItem>
-                        </ListGroup>
-                    </Col>
+                        <Fade in={this.state.isPostponed} tag="h5" className="mt-3">
+                        'Thank you! You will be sent a reminder again shortly.'
+                        </Fade>
                     </Row>
+                    <Fade in={!this.state.isPostponed && !this.state.isClicked} tag="h5" className="mt-3">
+                    <Row>
+                    <Col>
+                            <Button
+                                bsStyle="link"
+                                onClick={() => {this.setReminder(10000);}}
+                                block
+                            >Postpone by 5 minutes</Button>
+                            </Col>
+                            <Col>                            
+                            <Button
+                                bsStyle="link"
+                                onClick={() => {this.setReminder(20000);}}
+                                block
+                            >Postpone by 10 minutes</Button>
+                            </Col>
+                            <Col>
+                            <Button
+                                bsStyle="link"
+                                onClick={() => {this.setReminder(40000);}}
+                                block
+                            >Postpone by 20 minutes</Button>
+                        </Col>
+                    </Row>
+                    </Fade>
                 </Grid>
                 </Container>     
             </div>
@@ -305,63 +384,13 @@ class RequestText extends Component {
         
     }
 
-    postponed = () => {
-        confirmAlert({
-            message: 'Please select postpone time:',
-            buttons: [
-                {
-                    label: '5 Minutes',
-                    onClick: () => {
-                        this.setState({postponedFor: '5'});
-                        setTimeout(this.gotNewNotification, 10000);
-                        confirmAlert({
-                            message: 'Thank you! You will be sent a reminder in 5 minutes.',
-                            buttons: [
-                                {
-                                    label: 'Ok'
-                                }
-                            ]
-                        })
-                    }
-                },
-                {
-                    label: '10 Minutes',
-                    onClick: () => {
-                        this.setState({postponedFor: '10'});
-                        setTimeout(this.gotNewNotification, 600000);
-                        confirmAlert({
-                            message: 'Thank you! You will be sent a reminder in 10 minutes.',
-                            buttons: [
-                                {
-                                    label: 'Ok'
-                                }
-                            ]
-                        })
-                    }
-                },
-                {
-                    label: '20 Minutes',
-                    onClick: () => {
-                        this.setState({postponedFor: '20'});
-                        setTimeout(this.gotNewNotification, 1200000);
-                        confirmAlert({
-                            message: 'Thank you! You will be sent a reminder in 20 minutes.',
-                            buttons: [
-                                {
-                                    label: 'Ok'
-                                }
-                            ]
-                        })
-                    }
-                }
-            ]
-        })
-    }
+    
 
     submit = () => {
             this.setState({isClicked : !this.state.isClicked});
             this.setState({isSelected : true} );
-            this.props.addEmotions(this.state.individualHappiness,this.state.teamHappiness);
+            this.setState({isDataReadyToSubmit : false});
+            this.props.addEmotions(this.state.team, this.state.individualHappiness,this.state.teamHappiness);
     }
 
 
@@ -371,11 +400,13 @@ class RequestText extends Component {
 
 RequestText.propTypes = {
     addEmotions: PropTypes.func.isRequired,
+    team: PropTypes.object.isRequired,
     emotions: PropTypes.object.isRequired,
     emotion2: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
+    team: state.team,
     emotions: state.individualHappiness,
     emotion2: state.teamHappiness
 });

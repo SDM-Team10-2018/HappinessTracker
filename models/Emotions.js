@@ -3,7 +3,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const EmotionSchema = new Schema({
-    emotion : {
+    teamName : {
+        type : String,
+        //required : true
+    },
+    individualEmotion : {
+        type : String,
+        //required : true
+    },
+    teamEmotion : {
         type : String,
         //required : true
     },
@@ -13,4 +21,4 @@ const EmotionSchema = new Schema({
     }
 });
 
-module.exports = Emotion = mongoose.model('emotion', EmotionSchema);
+module.exports = Emotion = mongoose.model('emotions', EmotionSchema);

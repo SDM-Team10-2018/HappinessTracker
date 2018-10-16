@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ADD_EMOTIONS } from './types';
-var querystring = require("querystring");
+//import { ADD_EMOTIONS } from './types';
+//var querystring = require("querystring");
 
-export const addEmotions = (emotion,emotion2) => dispatch => {
+export const addEmotions = (team, emotion, emotion2) => dispatch => {
     //return {
     //    type: ADD_EMOTIONS,
     //    payload: emotion
@@ -10,7 +10,9 @@ export const addEmotions = (emotion,emotion2) => dispatch => {
 
 
     axios.post('/api/emotions', {
-        emotion: emotion
+        teamName: team,
+        individualEmotion: emotion,
+        teamEmotion: emotion2
       })
       .then(function (response) {
         console.log(response);
