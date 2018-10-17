@@ -25,8 +25,9 @@ import Notifier from "react-desktop-notification";
 class RequestText extends Component {
 
     state = {
-        isClicked: false,
+        //isClicked: false,
         isPostponed: false,
+        isNotSubmitted: true,
 
         // Validating for the completion of both selections for emotion
         isIndDataReadyToSubmit: false,
@@ -47,12 +48,6 @@ class RequestText extends Component {
         isTeamHappySelected: false,
         isTeamVeryHappySelected: false
     }
-
-   // toggle = () => {
-    //    this.setState({
-    //        isClicked : !this.state.isClicked
-    //    });
-    //}
 
 
     // Setting the ready status for submitting data 
@@ -104,6 +99,8 @@ class RequestText extends Component {
                 <Container>
                 <Grid> 
 
+
+                    {/* Individual Happiness Levels */}
                     <Row>
                     <h4>Select a picture below that best represents how happy you are feeling with your work:</h4>
                     </Row>
@@ -122,12 +119,13 @@ class RequestText extends Component {
                                     isIndHappySelected: false,
                                     isIndVeryHappySelected: false,
                                     isIndDataReadyToSubmit: true
+                                    
                                 });
                                 this.setSubmitReadyState();
                             }}
                             ></Image>
                         <h5>Not at all happy</h5>
-                        <Fade in={this.state.isIndNotAtAllHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndNotAtAllHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -152,7 +150,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Not so happy</h5>
-                        <Fade in={this.state.isIndNotSoHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndNotSoHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -176,7 +174,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Neutral</h5>
-                        <Fade in={this.state.isIndNeutralSelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndNeutralSelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -200,7 +198,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Happy</h5>
-                        <Fade in={this.state.isIndHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -224,7 +222,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Very happy</h5>
-                        <Fade in={this.state.isIndVeryHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndVeryHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -232,9 +230,12 @@ class RequestText extends Component {
                     </Row>
                     
 
+
+                    {/* Team Happiness Levels */}
                     <Row>
                     <h4>Select a picture below that best represents how happy you think your team is feeling with their work:</h4>
                     </Row>
+
                     <Row>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
@@ -255,7 +256,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Not at all happy</h5>
-                        <Fade in={this.state.isTeamNotAtAllHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamNotAtAllHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -279,7 +280,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Not so happy</h5>
-                        <Fade in={this.state.isTeamNotSoHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamNotSoHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -303,7 +304,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Neutral</h5>
-                        <Fade in={this.state.isTeamNeutralSelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamNeutralSelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -327,7 +328,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Happy</h5>
-                        <Fade in={this.state.isTeamHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -351,13 +352,18 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Very happy</h5>
-                        <Fade in={this.state.isTeamVeryHappySelected} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamVeryHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
                         </Col>
                     </Row>
-                    <Fade in={this.state.isDataReadyToSubmit && !this.state.isPostponed} tag="h5" className="mt-3">
+                  
+
+                    
+                    {/* The Submit button is displayed only once the team member has selected
+                    both individual and team happiness levels */}
+                    <Fade in={(this.state.isIndDataReadyToSubmit && this.state.isTeamDataReadyToSubmit) && this.state.isNotSubmitted && !this.state.isPostponed} tag="h5" className="mt-3">
                     <Row>
                         <Col align = "center" xs={12} sm={10}>
                             <Button
@@ -365,22 +371,32 @@ class RequestText extends Component {
                                 bsStyle="primary"
                                 onClick={this.submit}
                                 block
-                            >Submit</Button>
-
+                                >Submit</Button>
                         </Col>
                     </Row>
                     </Fade>
+                   
+
+                    {/* Confirmation message for the member once the data is submitted */}
                     <Row>
-                        <Fade in={this.state.isClicked} tag="h5" className="mt-3" id="submitted">
-                        'Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.'
+                        <Fade in={!this.state.isNotSubmitted} tag="h5" className="mt-3" id="submitted">
+                        Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.
                         </Fade>
                     </Row>
-                    <Row>
+
+
+
+                    {/* Confirmation message for the member once the user postpones the notification */}
+                    <Row align="center">
                         <Fade in={this.state.isPostponed} tag="h5" className="mt-3" id="postponed">
-                        'Thank you! You will be sent a reminder again shortly.'
+                        Thank you! You will be sent a reminder again shortly.
                         </Fade>
                     </Row>
-                    <Fade in={!this.state.isPostponed && !this.state.isClicked} tag="h5" className="mt-3">
+
+
+
+                    {/* Displaying the postone options through the application */}
+                    <Fade in={!this.state.isPostponed && this.state.isNotSubmitted} tag="h5" className="mt-3">
                     <Row>
                     <Col>
                             <Button
@@ -418,9 +434,10 @@ class RequestText extends Component {
     // Invoking the actions to save the user information in the db
     // once the submit button is clicked 
     submit = () => {
-            this.setState({isClicked : !this.state.isClicked});
+            //this.setState({isClicked : !this.state.isClicked});
             this.setState({isSelected : true} );
             this.setState({isDataReadyToSubmit : false});
+            this.setState({isNotSubmitted:false})
             this.props.addEmotions(this.state.team, this.state.individualHappiness,this.state.teamHappiness);
     }
 }
