@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { Container , Row, Col, Fade} from 'reactstrap';
 import { Grid, Image, Button} from 'react-bootstrap';
-//import 'react-confirm-alert/src/react-confirm-alert.css';
-import VerySad from '../images/VerySad.jpg';
-import Sad from '../images/Sad.jpg';
-import Meh from '../images/Neutral.jpg';
-import Happy from '../images/Happy.jpg';
-import VeryHappy from '../images/VeryHappy.jpg';
+
+// Import images to represent individual happiness levels
+import IndNotAtAllHappy from '../images/IndNotAtAllHappy.jpg';
+import IndNotSoHappy from '../images/IndNotSoHappy.jpg';
+import IndNeutral from '../images/IndNeutral.jpg';
+import IndHappy from '../images/IndHappy.jpg';
+import IndVeryHappy from '../images/IndVeryHappy.jpg';
+
+// Import images to represent team happiness levels
+import TeamNotAtAllHappy from '../images/TeamNotAtAllHappy.jpg';
+import TeamNotSoHappy from '../images/TeamNotSoHappy.jpg';
+import TeamNeutral from '../images/TeamNeutral.jpg';
+import TeamHappy from '../images/TeamHappy.jpg';
+import TeamVeryHappy from '../images/TeamVeryHappy.jpg';
+
 import GreenCheck from '../images/GreenCheck.jpg';
 import { connect } from 'react-redux';
 import { addEmotions } from '../actions/emotionActions';
@@ -101,9 +110,9 @@ class RequestText extends Component {
                     <Row>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
-                            id="VS"
+                            id="IndNotAtAllHappy"
                             width="100px" height="100px"
-                            src={VerySad}  
+                            src={IndNotAtAllHappy}  
                             circle
                             onClick = { () => {
                                 this.setState({individualHappiness: 'NotAtAllHappy'});
@@ -126,8 +135,9 @@ class RequestText extends Component {
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
+                            id = "IndNotSoHappy"
                             width="100px" height="100px"
-                            src={Sad} 
+                            src={IndNotSoHappy} 
                             circle
                             onClick = { () => {
                                 this.setState({individualHappiness: 'NotSoHappy'});
@@ -150,7 +160,8 @@ class RequestText extends Component {
                         <Col align="center" xs={12} sm={2}>
                         <Image 
                             width="100px" height="100px"
-                            src={Meh}  
+                            id = "IndNeutral"
+                            src={IndNeutral}  
                             circle
                             onClick = { () => {
                                 this.setState({individualHappiness: 'Neutral'});
@@ -173,7 +184,8 @@ class RequestText extends Component {
                         <Col align="center" xs={12} sm={2}>
                         <Image 
                             width="100px" height="100px"
-                            src={Happy} 
+                            id = "IndHappy"
+                            src={IndHappy} 
                             circle
                             onClick = { () => {
                                 this.setState({individualHappiness: 'Happy'});
@@ -196,7 +208,8 @@ class RequestText extends Component {
                         <Col align="center" xs={12} sm={2}>
                         <Image 
                             width="100px" height="100px"
-                            src={VeryHappy}  
+                            id = "IndVeryHappy"
+                            src={IndVeryHappy}  
                             circle
                             onClick = { () => {
                                 this.setState({individualHappiness: 'VeryHappy'});
@@ -225,9 +238,9 @@ class RequestText extends Component {
                     <Row>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
-                            id="VS"
+                            id="TeamNotAtAllHappy"
                             width="100px" height="100px"
-                            src={VerySad}  
+                            src={TeamNotAtAllHappy}  
                             circle
                             onClick = { () => {
                                 this.setState({teamHappiness: 'NotAtAllHappy'});
@@ -241,7 +254,7 @@ class RequestText extends Component {
                                 this.setSubmitReadyState();
                             }}
                             ></Image>
-                        <h5>Not At All happy</h5>
+                        <h5>Not at all happy</h5>
                         <Fade in={this.state.isTeamNotAtAllHappySelected} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
@@ -249,8 +262,9 @@ class RequestText extends Component {
                         </Col>
                         <Col align="center" xs={12} sm={2}>
                         <Image 
+                            id="TeamNotSoHappy"
                             width="100px" height="100px"
-                            src={Sad} 
+                            src={TeamNotSoHappy} 
                             circle
                             onClick = { () => {
                                 this.setState({teamHappiness: 'NotSoHappy'});
@@ -273,7 +287,8 @@ class RequestText extends Component {
                         <Col align="center" xs={12} sm={2}>
                         <Image 
                             width="100px" height="100px"
-                            src={Meh}  
+                            id="TeamNeutral"
+                            src= {TeamNeutral}  
                             circle
                             onClick = { () => {
                                 this.setState({teamHappiness: 'Neutral'});
@@ -296,7 +311,8 @@ class RequestText extends Component {
                         <Col align="center" xs={12} sm={2}>
                         <Image 
                             width="100px" height="100px"
-                            src={Happy} 
+                            id="TeamHappy"
+                            src={TeamHappy} 
                             circle
                             onClick = { () => {
                                 this.setState({teamHappiness: 'Happy'});
@@ -319,7 +335,8 @@ class RequestText extends Component {
                         <Col align="center" xs={12} sm={2}>
                         <Image 
                             width="100px" height="100px"
-                            src={VeryHappy}  
+                            id = "TeamVeryHappy"
+                            src={TeamVeryHappy}  
                             circle
                             onClick = { () => {
                                 this.setState({teamHappiness: 'VeryHappy'});
@@ -344,6 +361,7 @@ class RequestText extends Component {
                     <Row>
                         <Col align = "center" xs={12} sm={10}>
                             <Button
+                                id = "Submit"
                                 bsStyle="primary"
                                 onClick={this.submit}
                                 block
@@ -353,12 +371,12 @@ class RequestText extends Component {
                     </Row>
                     </Fade>
                     <Row>
-                        <Fade in={this.state.isClicked} tag="h5" className="mt-3">
+                        <Fade in={this.state.isClicked} tag="h5" className="mt-3" id="submitted">
                         'Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.'
                         </Fade>
                     </Row>
                     <Row>
-                        <Fade in={this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isPostponed} tag="h5" className="mt-3" id="postponed">
                         'Thank you! You will be sent a reminder again shortly.'
                         </Fade>
                     </Row>
@@ -366,6 +384,7 @@ class RequestText extends Component {
                     <Row>
                     <Col>
                             <Button
+                                id="5min"
                                 bsStyle="link"
                                 onClick={() => {this.setReminder(10000);}}
                                 block
@@ -374,6 +393,7 @@ class RequestText extends Component {
                             <Col>                            
                             <Button
                                 bsStyle="link"
+                                id="10min"
                                 onClick={() => {this.setReminder(20000);}}
                                 block
                             >Postpone by 10 minutes</Button>
@@ -381,6 +401,7 @@ class RequestText extends Component {
                             <Col>
                             <Button
                                 bsStyle="link"
+                                id="20min"
                                 onClick={() => {this.setReminder(40000);}}
                                 block
                             >Postpone by 20 minutes</Button>
