@@ -372,7 +372,7 @@ class RequestText extends Component {
                     </Fade>
                     <Row>
                         <Fade in={this.state.isClicked} tag="h5" className="mt-3" id="submitted">
-                        'Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.'
+                        Thanks for your help! Your happiness information has been saved. We will remind you for the next notification.
                         </Fade>
                     </Row>
                     <Row>
