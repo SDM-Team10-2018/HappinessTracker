@@ -25,9 +25,10 @@ import Notifier from "react-desktop-notification";
 class RequestText extends Component {
 
     state = {
-        //isClicked: false,
+        //Status variables to control button and link enable/disable values
         isPostponed: false,
         isNotSubmitted: true,
+        isFinalSubmissionDone: false,
 
         // Validating for the completion of both selections for emotion
         isIndDataReadyToSubmit: false,
@@ -86,8 +87,8 @@ class RequestText extends Component {
         })
         this.render();
 
-        // [For Current Sprint] - Setting up default notifications for admin specified time delays
-        setTimeout(this.gotNewNotification, 1000000);
+        // [For Future Sprint] - Setting up default notification to simulate admin specified time delays - 45 min
+        setTimeout(this.gotNewNotification, 27000000);
     }
 
     // Rendering the Individual Emotion Selection Section, 
@@ -125,7 +126,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Not at all happy</h5>
-                        <Fade in={this.state.isIndNotAtAllHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndNotAtAllHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -150,7 +151,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Not so happy</h5>
-                        <Fade in={this.state.isIndNotSoHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndNotSoHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -174,7 +175,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Neutral</h5>
-                        <Fade in={this.state.isIndNeutralSelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndNeutralSelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -198,7 +199,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Happy</h5>
-                        <Fade in={this.state.isIndHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -222,7 +223,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Very happy</h5>
-                        <Fade in={this.state.isIndVeryHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isIndVeryHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -256,7 +257,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Not at all happy</h5>
-                        <Fade in={this.state.isTeamNotAtAllHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamNotAtAllHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -280,7 +281,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Not so happy</h5>
-                        <Fade in={this.state.isTeamNotSoHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamNotSoHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -304,7 +305,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Neutral</h5>
-                        <Fade in={this.state.isTeamNeutralSelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamNeutralSelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -328,7 +329,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Happy</h5>
-                        <Fade in={this.state.isTeamHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -352,7 +353,7 @@ class RequestText extends Component {
                             }}
                             ></Image>
                         <h5>Very happy</h5>
-                        <Fade in={this.state.isTeamVeryHappySelected && !this.state.isPostponed} tag="h5" className="mt-3">
+                        <Fade in={this.state.isTeamVeryHappySelected && !this.state.isPostponed && !this.state.isFinalSubmissionDone} tag="h5" className="mt-3">
                             <Image width="50px" height="50px"
                             src={GreenCheck}></Image>
                         </Fade>
@@ -402,7 +403,7 @@ class RequestText extends Component {
                             <Button
                                 id="5min"
                                 bsStyle="link"
-                                onClick={() => {this.setReminder(10000);}}
+                                onClick={() => {this.setReminder(300000);}}
                                 block
                             >Postpone by 5 minutes</Button>
                             </Col>
@@ -410,7 +411,7 @@ class RequestText extends Component {
                             <Button
                                 bsStyle="link"
                                 id="10min"
-                                onClick={() => {this.setReminder(20000);}}
+                                onClick={() => {this.setReminder(600000);}}
                                 block
                             >Postpone by 10 minutes</Button>
                             </Col>
@@ -418,7 +419,7 @@ class RequestText extends Component {
                             <Button
                                 bsStyle="link"
                                 id="20min"
-                                onClick={() => {this.setReminder(40000);}}
+                                onClick={() => {this.setReminder(12000000);}}
                                 block
                             >Postpone by 20 minutes</Button>
                         </Col>
@@ -434,7 +435,7 @@ class RequestText extends Component {
     // Invoking the actions to save the user information in the db
     // once the submit button is clicked 
     submit = () => {
-            //this.setState({isClicked : !this.state.isClicked});
+            this.setState({isFinalSubmissionDone : true} );
             this.setState({isSelected : true} );
             this.setState({isDataReadyToSubmit : false});
             this.setState({isNotSubmitted:false})
